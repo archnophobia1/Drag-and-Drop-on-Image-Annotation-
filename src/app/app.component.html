@@ -1,0 +1,34 @@
+
+
+
+<canvas #canvas width="640" height="480" (dragover)="onDragOver($event)" (drop)="onDragEnd($event)"></canvas>
+<br><br>
+
+<button (click)="clearCanvas()">Clear Annotations</button> 
+
+<span class="note-style">(Drag and drop images with label on Tract Image)</span>
+<br><br>
+
+
+
+
+<div class="images">
+  <div *ngFor="let item of imagesList; let i= index;" draggable="true" (dragstart)="onDragStart($event,i)"
+  [style.width.%]="tractImageWidth"> 
+    <span class="image-options">
+        
+      <span class="image-option-icon icon-delete" (click)="deleteImage(item.id)">Delete</span>    
+    </span>                            
+    <div class="item-content" >     
+      <span class="image-label">{{item.label}}</span>                             
+      <img [src]="item.url" [alt]="'Captured Image'">
+    
+      <div class="item-options">  
+        <div>
+          <span class="image-number">{{i + 1 }}</span>
+          <div class="comment large-text" *ngIf="item.caption" >{{item.caption}}</div>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
